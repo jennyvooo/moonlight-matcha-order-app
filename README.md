@@ -1,6 +1,6 @@
 # Moonlight Matcha Order App
 
-A calm, café-inspired ordering experience built with React. Users can browse drinks and pastries, customize their order, and place a pickup request online — all from a clean, minimal interface.
+The Moonlight Matcha Order App is a small web application that lets users browse a matcha café menu and build a custom drink order. Users can customize drinks, add them to a cart, edit or remove items, and submit a pickup order form. Cart and order data are saved using localStorage so the data persists even after refreshing the page.
 
 ---
 
@@ -41,6 +41,14 @@ npm run build
 
 ---
 
-## Project Status
+## Known Bugs or Limitations
 
-Currently in early development. The landing page is live; core features are in progress.
+During development, several bugs were discovered and fixed while testing the cart logic, responsive layout, and accessibility behavior. For example, the cart originally used Date.now() as the ID for each item, which could cause duplicate IDs if two items were added within the same millisecond. This was fixed by switching to crypto.randomUUID() to guarantee unique IDs. Another issue was that the cart badge initially counted the number of cart entries rather than the total quantity of items, which could misrepresent the actual order size. This was corrected by summing the item quantities instead.
+
+Some additional improvements were made during responsive testing. Small mobile UI issues were fixed, such as buttons being too small to tap easily, input text causing zooming on iOS devices, and modal windows overflowing on smaller screens. Accessibility improvements were also added, including proper ARIA attributes and keyboard support for closing modals with the Escape key.
+
+There are still a few intentional limitations. Cart data is stored locally in the browser using localStorage, so orders do not persist across different devices or browsers. Additionally, the application assumes that the data stored in localStorage has not been manually modified, so there is no strict validation for corrupted stored data.
+
+## What I learned
+
+One thing I learned from this project is how helpful AI can be for reviewing code and catching issues that are easy to overlook. During development, several bugs were discovered related to cart logic, responsive layout, and accessibility features, and fixing them helped make the app more reliable and usable. At the same time, I learned that AI suggestions still need to be evaluated carefully because not every possible edge case is worth fixing for a project of this size. Overall, the project showed me how AI can be a useful development partner while still requiring human judgment to decide what solutions make the most sense.
