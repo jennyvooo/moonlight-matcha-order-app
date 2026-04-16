@@ -16,6 +16,8 @@ function App() {
   const [selectedItem, setSelectedItem]     = useState(null)
   const [cart, setCart]                     = useState(() => loadJSON(CART_KEY, []))
   const [orderPlaced, setOrderPlaced]       = useState(false)
+  const [quote, setQuote]                   = useState(null)
+  const [quoteLoading, setQuoteLoading]     = useState(false)
   const [favorites, setFavorites]           = useState(() => new Set(loadJSON(FAVORITES_KEY, [])))
 
   useEffect(() => { saveJSON(CART_KEY, cart) },           [cart])
@@ -47,6 +49,13 @@ function App() {
     })
     setCart([])
     setOrderPlaced(true)
+    setQuote(null)
+    setQuoteLoading(true)
+    fetch(`https://dummyjson.com/quotes/random?t=${Date.now()}`, { cache: 'no-store' })
+      .then((res) => res.json())
+      .then((data) => setQuote({ content: data.quote, author: data.author }))
+      .catch((err) => console.error('quote fetch failed:', err))
+      .finally(() => setQuoteLoading(false))
   }
 
   function updateQuantity(id, delta) {
@@ -200,6 +209,18 @@ function App() {
               <div className="order-confirmation">
                 <p className="confirmation-heading">Order placed!</p>
                 <p className="confirmation-sub">We'll have it ready at your selected time.</p>
+                <div className="confirmation-quote">
+                  {quoteLoading ? (
+                    <p className="quote-loading">Fetching your quote…</p>
+                  ) : quote ? (
+                    <>
+                      <p className="quote-text">"{quote.content}"</p>
+                      <p className="quote-author">— {quote.author}</p>
+                    </>
+                  ) : (
+                    <p className="quote-text">Take a breath and enjoy the moment.</p>
+                  )}
+                </div>
                 <button
                   type="button"
                   className="new-order-btn"

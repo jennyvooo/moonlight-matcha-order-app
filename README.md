@@ -52,3 +52,19 @@ There are still a few intentional limitations. Cart data is stored locally in th
 ## What I learned
 
 One thing I learned from this project is how helpful AI can be for reviewing code and catching issues that are easy to overlook. During development, several bugs were discovered related to cart logic, responsive layout, and accessibility features, and fixing them helped make the app more reliable and usable. At the same time, I learned that AI suggestions still need to be evaluated carefully because not every possible edge case is worth fixing for a project of this size. Overall, the project showed me how AI can be a useful development partner while still requiring human judgment to decide what solutions make the most sense.
+
+--
+
+# Week 12 Exercise: AI-Powered Feature
+
+## External API Feature
+
+I added a quote-based confirmation feature to the app using an external API. After a user submits a pickup order, the app fetches a random quote and displays it as part of the thank-you message. This adds a small but meaningful touch to the user experience and fits the calm, café-style theme of the app.
+
+The feature uses the DummyJSON Quotes API:
+https://dummyjson.com/quotes/random
+
+## How to Run
+npm install
+npm run dev
+Then open the local development URL in your browser.
